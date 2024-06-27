@@ -1,5 +1,5 @@
 import pymongo
-
+import certifi
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -10,7 +10,7 @@ class Connection :
     
     def _connection():
         url = os.getenv("connection_url")
-        Client = pymongo.MongoClient(url)
+        Client = pymongo.MongoClient(url, tls=True, tlsCAFile=certifi.where())
         db = Client["musicplayer"]
         collection = db['musicplayer']
         
